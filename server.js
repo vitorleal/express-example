@@ -1,4 +1,5 @@
 var express = require('express'),
+    path    = require('path'),
 	  app     = express();
 
 //Index
@@ -6,9 +7,9 @@ app.get('/', function(req, res) {
 		res.send('Hello world');
 });
 
-
+//Enviando html
 app.get('/about', function(req, res) {
-		res.render('templates/about.html');
+    res.sendfile(__dirname + '/public/about.html');
 });
 
 //User
