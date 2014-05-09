@@ -1,6 +1,6 @@
 var express = require('express'),
     path    = require('path'),
-	  app     = express();
+	  app   = express();
 
 //Index
 app.get('/', function(req, res) {
