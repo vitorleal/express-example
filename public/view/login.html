@@ -1,4 +1,6 @@
 <section class="container">
+  <p ng-if="error" class="alert alert-danger">{{ error }}</p>
+
   <form class="login-form" ng-submit="enviar()">
     <input ng-model="email" class="form-control input-lg" type="email"    placeholder="email">
     <input ng-model="pass" class="form-control input-lg"  type="password" placeholder="senha">

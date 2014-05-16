@@ -26,6 +26,7 @@ app.controller('login', function ($scope, $location, $http) {
     })
     .success(function (data) {
       if (data.login) {
+        $scope.error = null;
         $location.path('/lista');
 
       } else {
