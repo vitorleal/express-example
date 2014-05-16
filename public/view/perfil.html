@@ -1,0 +1,11 @@
+<section class="container">
+  <div class="text-center">
+    <img class="img-circle" src="{{ user.thumb }}" alt="{{ user.name }}" width="120" height="120">
+    <h2>{{ user.name }}</h2>
+    <p>Endereço: <strong>{{ user.address }}</strong></p>
+    <p>Profissão: <strong>{{ user.job }}</strong></p>
+    <p>Idade: <strong>{{ user.age }} anos</strong></p>
+
+    <a ng-href="{{ back }}" class="btn btn-success btn-lg btn-block">Voltar</a>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>App Demo</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/typicons.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster">
+
+    <script src="js/vendor/angular.min.js"></script>
+  </head>
+
+  <body ng-app="appDemo">
+    <div ng-include src="'view/common/header.html'"></div>
+    <div class="main-view" ng-view ng-animate="{ enter: 'view-enter', leave: 'view-leave' }"></div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

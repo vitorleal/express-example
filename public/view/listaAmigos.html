@@ -1,0 +1,16 @@
+<section class="container">
+  <ul class="list-unstyled friend-list">
+    <li class="clearfix" ng-repeat="friend in friends">
+      <img src="{{ friend.thumb }}" class="img-circle thumb" width="50" height="50">
+      <strong>{{ friend.name }}</strong>
+
+      <label class="pull-right">
+        <span class="invite-friend icon icon-thumbs-down" ng-show="friend.invited === false"></span>
+        <span class="invite-friend icon icon-thumbs-up"   ng-show="friend.invited === true"></span>
+        <input type="checkbox" class="hide pull-right"    ng-model="friend.invited">
+      <label>
+    </li>
+  </ul>
+</section>
+
+<div ng-include src="'view/common/footer.html'"></div>

@@ -14,6 +14,14 @@ app.use(allowCrossDomain);
 //Faz o parser do body
 app.use(bodyParser());
 
+//Adiciona a pasta public como local dos arquivos estáticos
+app.use(express.static('public'));
+
+
+//Carrega a url principal
+app.get('/', function (req, res) {
+	res.sendfile(__dirname + '/public/index.html');
+});
 
 //User
 app.get('/user', function (req, res) {
