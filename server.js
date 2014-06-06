@@ -75,7 +75,7 @@ app.post('/api/:collection', function(req, res, next) {
 //Vamos buscar um item pelo id
 app.get('/api/:collection/:id', function (req, res, next) {
   //pagamos o parâmetro id enviado pelo usuário
-  var id = req.param.id;
+  var id = req.params.id;
 
   //buscamos na nossa coléction pelo id enviado
   req.collection.findById(id, function (e, result) {
@@ -91,10 +91,11 @@ app.get('/api/:collection/:id', function (req, res, next) {
 //Vamos atualizar utilizando o id
 app.put('/api/:collection/:id', function (req, res, next) {
   //pega a informação enciada pelo usuário
-  var json = req.body;
+  var json = req.body,
+      id   = req.params.id;
 
   //faz um update buscando pelo id
-  req.collection.updateById(req.params.id, { $set: json }, { safe: true, multi:false }, function (e, result) {
+  req.collection.updateById(id, { $set: json }, { safe: true, multi:false }, function (e, result) {
     if (e) {
       return next(e);
     }
