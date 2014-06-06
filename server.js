@@ -1,7 +1,7 @@
 var express    = require('express'),
     bodyParser = require('body-parser'),
     mongoskin  = require('mongoskin'),
-    db         = mongoskin.db('mongodb://vitorleal:1324@ds031948.mongolab.com:31948/cabralia', { safe: true })
+    db         = mongoskin.db('mongodb://<USER>:<PASS>@<ADDRESS>:<PORT>/<DATABASE>', { safe: true }),
 	  app        = express();
 
 
