@@ -1,5 +1,7 @@
 var express    = require('express'),
     bodyParser = require('body-parser'),
+    mongoskin  = require('mongoskin'),
+    db         = mongoskin.db('mongodb://vitorleal:1324@ds031948.mongolab.com:31948/cabralia', { safe: true })
 	  app        = express();
 
 
@@ -17,8 +19,18 @@ app.use(bodyParser());
 //Adiciona a pasta public como local dos arquivos estáticos (html, css, js imagens ...)
 app.use(express.static('public'));
 
+//Adiciona o parametro collection em todas as ulr
+app.param('collection', function (req, res, next, collection) {
+  req.collection = db.collection(collection);
+  return next();
+});
 
-//Carrega a url principal e envia um arquivo html
+
+/*
+ *
+ *  Páginas HTML
+ *
+ */
 app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/public/index.html');
 });
@@ -29,54 +41,51 @@ app.get('/', function (req, res) {
  *  API
  *
  */
-
-//Envia em formato JSON os dados de um usuário
-app.get('/user', function (req, res) {
-  var user = {
-	    name   : 'Vitor Leal',
-	    address: 'Rua Lorem Ipsum Dolor 902',
-	    job    : 'Analista de Sistemas Senior',
-	    age    : '28',
-	    thumb  : 'http://lorempixel.com/120/120/sports/'
-  };
-
-	res.send(user);
-});
-
-
-//Envia um array com uma lista de amigos em formato JSON
-app.get('/friends', function (req, res) {
-  var friends = [
-    { name: 'David',   thumb: 'http://lorempixel.com/50/50/sports/' },
-    { name: 'Erico',   thumb: 'http://lorempixel.com/50/50/sports/1' },
-    { name: 'Sheldon', thumb: 'http://lorempixel.com/50/50/sports/2' },
-    { name: 'João',    thumb: 'http://lorempixel.com/50/50/sports/3' },
-    { name: 'Fábio',   thumb: 'http://lorempixel.com/50/50/sports/4' },
-    { name: 'Marcos',  thumb: 'http://lorempixel.com/50/50/sports/5' }
-  ];
-
-  res.send({ friends: friends });
-});
-
-
-//Ao receber um POST verifica se o usuário enviou os dados corretos
-app.post('/login', function (req, res) {
-  if (!req.body) {
-    res.send({ login: false });
-
-  } else {
-    var email = req.body.email,
-        pass  = req.body.pass;
-
-    //Verifica se o email e a senha estão corretos
-    if (email === 'user@app.com' && pass == '1234') {
-      res.send({ login: true });
-
-    //Se não redireciona o usuário
-    } else {
-      res.send({ login: false });
+//Vamos pegar as informações
+app.get('/api/:collection', function (req, res, next) {
+  //buscamos todas as informações das collections
+  req.collection.find({}, { sort: [['_id', -1]] }).toArray(function (e, results) {
+    if (e) {
+      return next(e);
     }
-  }
+
+    //retornamos os resultados
+    res.send(results);
+  })
+})
+
+
+//Vamos inserir alguma informação na nossa collection
+app.post('/collections/:collection', function(req, res, next) {
+  //pegamos os valores enviados pelo usuário
+  var json = req.body;
+
+  //inserimos no banco
+  req.collection.insert(json, {}, function (e, results) {
+    if (e) {
+      return next(e);
+    }
+
+    //retornamos o resultado
+    res.send(results);
+  });
+});
+
+
+//Vamos buscar um item pelo id
+app.get('/collections/:collection/:id', function (req, res, next) {
+  //pagamos o parâmetro id enviado pelo usuário
+  var id = req.param.id;
+
+  //buscamos na nossa coléction pelo id enviado
+  req.collection.findById(id, function (e, result) {
+    if (e) {
+      return next(e);
+    }
+
+    //retornamos o resultado
+    res.send(result);
+  });
 });
 
 
