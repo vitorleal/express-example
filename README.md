@@ -3,7 +3,7 @@
 Para executar primeiro instale o Node.JS, depois instale o express com o comando:
 
 ```
-npm install express
+npm install express body-parser mongoskin
 ```
 
 Inicie o servidor
