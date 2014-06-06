@@ -1,15 +1,17 @@
-##Aplicação de exmplo utilizando [Node.js](http://nodejs.org) e [Express](http://expressjs.com)
+##Aplicação de exmplo utilizando [NodeJS](http://nodejs.org) e [Express](http://expressjs.com)
 
-Para executar primeiro instale o Node.JS, depois instale o express com o comando:
+Vamos utilizar o o serviço do [MognoLab](https://mongolab.com). Depois vamos fazer o deploy no [Heroku](https://www.heroku.com).
+
+Para rodar localmente primeiro instale o NodeJS, depois instale o express e as dependencias com o comando:
 
 ```
 npm install express body-parser mongoskin
 ```
 
-Inicie o servidor
+Agora podemos iniciar o servidor
 
 ```
 node server.js
 ```
 
-Visite o browser na página 127.0.0.1:5000
+Abra o navegador na página http://127.0.0.1:5000
