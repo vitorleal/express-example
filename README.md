@@ -5,7 +5,7 @@ Exemplo para a aula de introdução a Node.js do Instituto Mauá.
 Para executar primeiro instale o Node.JS, depois instale o express com o comando:
 
 ```
-npm install express
+npm install express body-parser mongoskin
 ```
 
 Inicie o servidor
