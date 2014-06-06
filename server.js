@@ -56,7 +56,7 @@ app.get('/api/:collection', function (req, res, next) {
 
 
 //Vamos inserir alguma informação na nossa collection
-app.post('/collections/:collection', function(req, res, next) {
+app.post('/api/:collection', function(req, res, next) {
   //pegamos os valores enviados pelo usuário
   var json = req.body;
 
@@ -73,7 +73,7 @@ app.post('/collections/:collection', function(req, res, next) {
 
 
 //Vamos buscar um item pelo id
-app.get('/collections/:collection/:id', function (req, res, next) {
+app.get('/api/:collection/:id', function (req, res, next) {
   //pagamos o parâmetro id enviado pelo usuário
   var id = req.param.id;
 
@@ -88,7 +88,47 @@ app.get('/collections/:collection/:id', function (req, res, next) {
   });
 });
 
+//Vamos atualizar utilizando o id
+app.put('/api/:collection/:id', function (req, res, next) {
+  //pega a informação enciada pelo usuário
+  var json = req.body;
+
+  //faz um update buscando pelo id
+  req.collection.updateById(req.params.id, { $set: json }, { safe: true, multi:false }, function (e, result) {
+    if (e) {
+      return next(e);
+    }
+
+    if (result === 1) {
+      res.send({ msg: 'successo' });
+
+    } else {
+      res.send({ msg: 'erro' });
+    }
+  });
+});
+
+//Vamos remover um item buscando pelo id
+app.delete('/api/:collection/:id', function(req, res, next) {
+  //pagamos o parâmetro id enviado pelo usuário
+  var id = req.params.id;
+
+  //removemos o item buscando pelo id
+  req.collection.removeById(id, function (e, result) {
+    if (e) {
+      return next(e);
+    }
+
+    if (result === 1) {
+      res.send({ msg: 'successo' });
+
+    } else {
+      res.send({ msg: 'erro' });
+    }
+  });
+});
+
 
 //Roda o servidor na porta 5000
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
 console.log('Server running at http://127.0.0.1:5000/');
