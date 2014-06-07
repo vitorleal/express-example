@@ -5,7 +5,7 @@ Vamos utilizar o o serviço do [MognoLab](https://mongolab.com). Depois vamos fa
 Para rodar localmente primeiro instale o NodeJS, depois instale o express e as dependencias com o comando:
 
 ```
-npm install express body-parser mongoskin
+npm install
 ```
 
 Agora podemos iniciar o servidor
