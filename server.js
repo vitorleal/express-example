@@ -89,7 +89,7 @@ app.get('/api/:collection/:id', function (req, res, next) {
 });
 
 
-//Vamos buscar um item pelo id
+//Vamos buscar um item pela categoria
 app.get('/api/:collection/categoria/:categoria', function (req, res, next) {
   //pagamos o parâmetro categoria enviado pelo usuário
   var categoria = req.params.categoria;
