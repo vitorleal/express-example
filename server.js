@@ -35,11 +35,6 @@ app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/public/index.html');
 });
 
-app.get('/teste', function (req, res) {
-	res.send('Hello word');
-});
-
-
 /*
  *
  *  API
