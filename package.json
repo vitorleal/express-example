@@ -22,7 +22,7 @@
   "engines": {
     "node": "0.10.x",
     "npm": "1.4.x"
-  }
+  },
   "bugs": {
     "url": "https://github.com/vitorleal/express-example/issues"
   },
