@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 //Vamos pegar as informações
 app.get('/api/:collection', function (req, res, next) {
   //buscamos todas as informações das collections
-  req.collection.find({}, { sort: [['_id', -1]] }).toArray(function (erro, results) {
+  req.collection.find({}, { sort: [['ordem', 1]] }).toArray(function (erro, results) {
     if (erro) {
       return next(erro);
     }
@@ -87,6 +87,24 @@ app.get('/api/:collection/:id', function (req, res, next) {
     res.send(result);
   });
 });
+
+
+//Vamos buscar um item pelo id
+app.get('/api/:collection/categoria/:categoria', function (req, res, next) {
+  //pagamos o parâmetro categoria enviado pelo usuário
+  var categoria = req.params.categoria;
+
+  //buscamos na nossa coléction pelo id enviado
+  req.collection.find({ categoria: categoria }).toArray(function (e, result) {
+    if (e) {
+      return next(e);
+    }
+
+    //retornamos o resultado
+    res.send(result);
+  });
+});
+
 
 //Vamos atualizar utilizando o id
 app.put('/api/:collection/:id', function (req, res, next) {
