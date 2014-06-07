@@ -1,7 +1,7 @@
 var express    = require('express'),
     bodyParser = require('body-parser'),
     mongoskin  = require('mongoskin'),
-    db         = mongoskin.db(process.env.DATABASE_URL, { safe: true }),
+    db         = mongoskin.db('mongodb://vitorleal:1324@ds031948.mongolab.com:31948/cabralia', { safe: true }),
 	  app        = express();
 
 
@@ -35,6 +35,10 @@ app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/public/index.html');
 });
 
+app.get('/teste', function (req, res) {
+	res.send('Hello word');
+});
+
 
 /*
  *
@@ -44,9 +48,9 @@ app.get('/', function (req, res) {
 //Vamos pegar as informações
 app.get('/api/:collection', function (req, res, next) {
   //buscamos todas as informações das collections
-  req.collection.find({}, { sort: [['_id', -1]] }).toArray(function (e, results) {
-    if (e) {
-      return next(e);
+  req.collection.find({}, { sort: [['_id', -1]] }).toArray(function (erro, results) {
+    if (erro) {
+      return next(erro);
     }
 
     //retornamos os resultados
@@ -59,6 +63,7 @@ app.get('/api/:collection', function (req, res, next) {
 app.post('/api/:collection', function(req, res, next) {
   //pegamos os valores enviados pelo usuário
   var json = req.body;
+
 
   //inserimos no banco
   req.collection.insert(json, {}, function (e, results) {
