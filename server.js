@@ -51,8 +51,8 @@ app.get('/api/:collection', function (req, res, next) {
 
     //retornamos os resultados
     res.send(results);
-  })
-})
+  });
+});
 
 
 //Vamos inserir alguma informação na nossa collection
